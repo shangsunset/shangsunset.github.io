@@ -4,77 +4,77 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>http://localhost:8000/index.html</loc>
-<lastmod>2014-08-17T14:12:17-00:00</lastmod>
+<loc>http://shangsunset.github.io/index.html</loc>
+<lastmod>2014-08-17T14:14:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/archives.html</loc>
-<lastmod>2014-08-17T14:12:17-00:00</lastmod>
+<loc>http://shangsunset.github.io/archives.html</loc>
+<lastmod>2014-08-17T14:14:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tags.html</loc>
-<lastmod>2014-08-17T14:12:17-00:00</lastmod>
+<loc>http://shangsunset.github.io/tags.html</loc>
+<lastmod>2014-08-17T14:14:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/categories.html</loc>
-<lastmod>2014-08-17T14:12:17-00:00</lastmod>
+<loc>http://shangsunset.github.io/categories.html</loc>
+<lastmod>2014-08-17T14:14:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/pages/about.html</loc>
-<lastmod>2014-08-17T14:12:17-00:00</lastmod>
+<loc>http://shangsunset.github.io/pages/about.html</loc>
+<lastmod>2014-08-17T14:14:14-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/posts/2014/08/16/integrate-pelican-site-and-github-page-with-post-commit-hook/</loc>
+<loc>http://shangsunset.github.io/posts/2014/08/16/integrate-pelican-site-and-github-page-with-post-commit-hook/</loc>
 <lastmod>2014-08-16T10:50:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/misc.html</loc>
+<loc>http://shangsunset.github.io/category/misc.html</loc>
 <lastmod>2014-08-16T10:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tags/git-hook/</loc>
+<loc>http://shangsunset.github.io/tags/git-hook/</loc>
 <lastmod>2014-08-16T10:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tags/pelican/</loc>
+<loc>http://shangsunset.github.io/tags/pelican/</loc>
 <lastmod>2014-08-16T10:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tags/github-pages/</loc>
+<loc>http://shangsunset.github.io/tags/github-pages/</loc>
 <lastmod>2014-08-16T10:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/author/yeshen-shang.html</loc>
+<loc>http://shangsunset.github.io/author/yeshen-shang.html</loc>
 <lastmod>2014-08-16T10:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
