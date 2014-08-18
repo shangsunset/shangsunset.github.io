@@ -5,6 +5,7 @@ body {
 
 #blogtitle {
     font-size: 3em;
+    float:left;
 }
 #blogtitle a, #blogtitle a:hover, #blogtitle a:visited {
     color: #000;
@@ -30,10 +31,10 @@ body {
 }
 
 #mainnav li:before {
-    content: '{\00A0';
+    content: '\00A0';
 }
 #mainnav li:after {
-    content: '\00A0}';
+    content: '\00A0';
 }
 
 #content {
@@ -298,4 +299,49 @@ ul.tagcloud {
 #right-side #copyright {
     font-size: 0.8em;
     border-top: solid 0.5px #000;
+}
+
+@media screen and (max-width: 850px) {
+    /* Don't float navigation below 850px. */
+    #blogtitle {
+        float: none;
+    }
+    #mainnav {
+        float: none;
+    }
+
+    /* Change separators. */
+    #mainnav li:before {
+        content: '';
+    }
+    #mainnav li:after {
+        content: '\00A0\00B7';
+    }
+    #mainnav li.last:after {
+        content: '';
+    }
+}
+
+@media screen and (max-width: 600px) {
+    /* Justified text gets uglier below this size. */
+    #content p {
+        text-align: left;
+    }
+
+    /* Don't right-float footer. */
+    img.flattrbutton {
+        float: none;
+    }
+    div.tags p {
+        float: none;
+    }
+
+    /* Wrap even in pre tags */
+    #content .article-content pre {
+        white-space: pre-wrap;       /* css-3 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    }
 }
