@@ -31,10 +31,10 @@ body {
 }
 
 #mainnav li:before {
-    content: '\00A0';
+    content: '{\00A0';
 }
 #mainnav li:after {
-    content: '\00A0';
+    content: '\00A0}';
 }
 
 #content {
@@ -319,6 +319,11 @@ ul.tagcloud {
     }
     #mainnav li.last:after {
         content: '';
+    }
+
+    #right-side .section-container {
+        float:left;
+        margin-right: 30px;
     }
 }
 
