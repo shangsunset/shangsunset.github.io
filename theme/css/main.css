@@ -54,13 +54,14 @@ body {
 
 div.highlight pre, pre.literal-block {
     margin: 5px;
-    font-family: 'Anonymous Pro', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    font-family:: 'monaco'
     font-size: 14px;
 }
 
 div.highlight, pre.literal-block {
     border: 1px solid #DDDDDD;
-    font-family: 'Anonymous Pro','Consolas','Menlo','Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;
+    /* font-family: 'Anonymous Pro','Consolas','Menlo','Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; */
+    font-family:: 'monaco'
     margin: 20px 0;
     overflow: auto;
     padding: 10px;
@@ -71,21 +72,24 @@ pre.literal-block {
 }
 
 tt.literal {
-    font-family: 'Anonymous Pro', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    /* font-family: 'Anonymous Pro', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace; */
+    font-family:: 'monaco'
     background-color: #eee;
     padding: 2px 5px;
     font-size: 0.8em;
 }
 
 cite {
-    font-family: 'Anonymous Pro', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    /* font-family: 'Anonymous Pro', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace; */
+    font-family:: 'monaco'
     font-size: 13px;
     font-style: normal;
 }
 
 code {
     background-color: #EEEEEE;
-    font-family: 'Anonymous Pro', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    /* font-family: 'Anonymous Pro', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace; */
+    font-family:: 'monaco'
     border: 1px solid #ddd;
     padding: 0 2px 2px 3px;
     font-size: 0.8em;
