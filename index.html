@@ -42,6 +42,7 @@
        <ul id="mainnav">
           <li><a href="http://shangsunset.github.io">Home</a></li>
           <li><a href="http://shangsunset.github.io/pages/about.html">About</a></li>
+          <li><a href="http://shangsunset.github.io/pages/favorite-posts.html">Favorite Posts</a></li>
        </ul>
      </div>
     </div>
@@ -51,21 +52,130 @@
           <section id="content" class="hyphenate">
 
         <article class="entry-overview">
-            <div class="date">Aug 20, 2014 by <a rel="author" href="http://shangsunset.github.io/pages/aboutme.html">Yeshen Shang</a></div>
+            <div class="date">Wed 27 August 2014 by <a rel="author" href="http://shangsunset.github.io/pages/aboutme.html">Yeshen Shang</a></div>
             <div class="detail">
                 <header><h2>
-                    <a href="http://shangsunset.github.io/posts/2014/08/20/hello/" rel="bookmark" title="Permalink to hello">
-                        hello
+                    <a href="http://shangsunset.github.io/posts/2014/08/27/user-authentication-with-django-default-authentication-system/" rel="bookmark" title="Permalink to User Authentication With Django Default Authentication System">
+                        User Authentication With Django Default Authentication System
                     </a>
                 </h2></header>
 
-                   <div class="clearboth"><p>hi there</p></div>
+                   <div class="clearboth"><p>Please note, this post is for django 1.6. Assume we have a project level urls.py ready
+like this:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">some_app.views</span> <span class="kn">import</span> <span class="n">Some_class_based_view</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">autodiscover</span><span class="p">()</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span>
+    <span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="n">Some_class_based_view</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;home&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>All we need to do is to put below two lines in the urls.py as
+we are using django's default views from django.contrib.auth:</p>
+<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^login/$&#39;</span><span class="p">,</span> <span class="s">&#39;django.contrib.auth.views.login&#39;</span><span class="p">),</span>
+<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^logout/$&#39;</span><span class="p">,</span> <span class="s">&#39;django.contrib.auth.views.logout&#39;</span><span class="p">),</span>
+</pre></div>
+
+
+<p>After taking care of url mapping, the only thing left is to create templates for login and logout pages
+since Django provides no default template for the authentication views.
+Because we are uing views provided by django, and django's views will look for login.html
+and logged_out.html in templates/registration directory, we need to create a <code>registration</code> directory
+inside <code>templates</code> directory and put login.html and logged_out.html in it. So now the structure will 
+look like this:</p>
+<div class="highlight"><pre><span class="err">├──</span> <span class="n">your</span> <span class="n">project</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">__init__</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">settings</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">urls</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">wsgi</span><span class="p">.</span><span class="n">py</span>
+<span class="err">├──</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span>
+<span class="err">├──</span> <span class="n">some_app</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">__init__</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">admin</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">models</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">tests</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│  </span> <span class="err">├──</span> <span class="n">views</span><span class="p">.</span><span class="n">py</span>
+<span class="err">└──</span> <span class="n">templates</span>
+    <span class="err">├──</span> <span class="n">base</span><span class="p">.</span><span class="n">html</span>
+    <span class="err">├──</span> <span class="n">some_app</span>
+    <span class="err">│  </span> <span class="err">└──</span> <span class="n">some_list</span><span class="p">.</span><span class="n">html</span>
+    <span class="err">└──</span> <span class="n">registration</span>
+        <span class="err">├──</span> <span class="n">logged_out</span><span class="p">.</span><span class="n">html</span>
+        <span class="err">└──</span> <span class="n">login</span><span class="p">.</span><span class="n">html</span>
+</pre></div>
+
+
+<p>Lastly, here is some basic templates you can start with.</p>
+<p><code>login.html</code>:</p>
+<div class="highlight"><pre><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s">&quot;base.html&quot;</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">errors</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Your</span> <span class="n">username</span> <span class="ow">and</span> <span class="n">password</span> <span class="n">didn</span><span class="s">&#39;t match. Please try again.&lt;/p&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="o">&lt;</span><span class="n">form</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="n">action</span><span class="o">=</span><span class="s">&quot;{</span><span class="si">% u</span><span class="s">rl &#39;django.contrib.auth.views.login&#39; %}&quot;</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">label_tag</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">username</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">label_tag</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">password</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;login&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;next&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;{{ next }}&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+
+
+<p>The hidden next field allows the view to redirect the user to the page requested,
+if the login request was triggered by a permission failure.</p>
+<p><code>base.html</code>:</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">some</span> <span class="n">title</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">header</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">user</span> <span class="p">}}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_anonymous</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{</span><span class="si">% u</span><span class="s">rl &#39;django.contrib.auth.views.login&#39; %}&quot;</span><span class="o">&gt;</span><span class="n">login</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{</span><span class="si">% u</span><span class="s">rl &#39;django.contrib.auth.views.logout&#39; %}&quot;</span><span class="o">&gt;</span><span class="n">logout</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">header</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{</span><span class="si">% u</span><span class="s">rl &#39;home&#39; %}&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">title</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</pre></div></div>
 
 
             </div>
         </article>
         <article class="entry-overview">
-            <div class="date">Aug 16, 2014 by <a rel="author" href="http://shangsunset.github.io/pages/aboutme.html">Yeshen Shang</a></div>
+            <div class="date">Sat 16 August 2014 by <a rel="author" href="http://shangsunset.github.io/pages/aboutme.html">Yeshen Shang</a></div>
             <div class="detail">
                 <header><h2>
                     <a href="http://shangsunset.github.io/posts/2014/08/16/integrate-pelican-site-and-github-page-with-post-commit-hook/" rel="bookmark" title="Permalink to Integrate Pelican Site and Github Page With Post Commit Hook">
@@ -75,8 +185,8 @@
 
                    <div class="clearboth"><p>On Pelican's doc <a href="http://docs.getpelican.com/en/latest/tips.html">Tips</a> section, 
 they have a trick to help you automatically push your output generated by Pelican to Github Page
-using post-commit hook. As a newbie, i didnt know how to make
-post-commit script executable until i found <a href="http://mathamy.com/tag/git.html">Amy Hanlon's Post</a>. So this is how you do it step by step:</p>
+using post-commit hook. As a newbie, I didnt know how to make
+post-commit script executable until I found <a href="http://mathamy.com/tag/git.html">Amy Hanlon's Post</a>. So this is how you do it step by step:</p>
 <p>Go to <code>.git/hooks/</code> in your local username.github.io repo and create
 a file named <code>post-commit</code>:</p>
 <div class="highlight"><pre><span class="err">$</span> <span class="n">vim</span> <span class="p">.</span><span class="n">git</span><span class="o">/</span><span class="n">hooks</span><span class="o">/</span><span class="n">post</span><span class="o">-</span><span class="n">commit</span>
@@ -85,7 +195,7 @@ a file named <code>post-commit</code>:</p>
 
 <p>Put following lines in <code>post-commit</code>:</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
-pelican content -o output -s pelicanconf.py <span class="o">&amp;&amp;</span> ghp-import output <span class="o">&amp;&amp;</span> git push git@github.com:username/username.github.io.git gh-pages:master
+pelican content -o output -s pelicanonf.py <span class="o">&amp;&amp;</span> ghp-import output <span class="o">&amp;&amp;</span> git push git@github.com:username/username.github.io.git gh-pages:master
 </pre></div>
 
 
@@ -106,14 +216,6 @@ pelican content -o output -s pelicanconf.py <span class="o">&amp;&amp;</span> gh
        <div id="right-side" class="col-1-12">&nbsp;</div>
        <div id="right-side" class="col-3-12">
 
-<div class="section-container">
-   <h3>Blogroll</h3>
-   <ul>
-      <li><a href="http://getpelican.com/" target="_blank">Pelican <i class="fa fa-globe fa-fw"></i></a></li>
-      <li><a href="http://python.org/" target="_blank">Python.org <i class="fa fa-globe fa-fw"></i></a></li>
-      <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2 <i class="fa fa-globe fa-fw"></i></a></li>
-   </ul>
-</div>
 
 <div class="section-container">
    <h3>Social Network</h3>
@@ -134,7 +236,7 @@ pelican content -o output -s pelicanconf.py <span class="o">&amp;&amp;</span> gh
         </a>
       </li>
       <li>
-        <a href="www.linkedin.com/in/alvinshang/" target="_blank">Linkedin&nbsp;
+        <a href="http://linkedin.com/in/alvinshang/" target="_blank">Linkedin&nbsp;
            <i class="fa fa-linkedin fa-fw"></i>
         </a>
       </li>
@@ -144,6 +246,7 @@ pelican content -o output -s pelicanconf.py <span class="o">&amp;&amp;</span> gh
 <div class="section-container">
    <h3>Categories</h3>
    <ul>
+        <li><a href="http://shangsunset.github.io/category/django.html">Django <i class="fa fa-folder-open fa-fw"></i></a></li>
         <li><a href="http://shangsunset.github.io/category/misc.html">misc <i class="fa fa-folder-open fa-fw"></i></a></li>
    </ul>
 </div>
@@ -151,9 +254,11 @@ pelican content -o output -s pelicanconf.py <span class="o">&amp;&amp;</span> gh
 <div class="section-container">
    <h3>Tags</h3>
    <ul class="tagcloud">
-        <li class="tag-4"><a href="http://shangsunset.github.io/tag/git-hook.html">#Git Hook</a></li>
-        <li class="tag-4"><a href="http://shangsunset.github.io/tag/pelican.html">#Pelican</a></li>
+        <li class="tag-4"><a href="http://shangsunset.github.io/tag/django-authentication.html">#Django Authentication</a></li>
+        <li class="tag-4"><a href="http://shangsunset.github.io/tag/django.html">#Django</a></li>
         <li class="tag-4"><a href="http://shangsunset.github.io/tag/github-pages.html">#Github Pages</a></li>
+        <li class="tag-4"><a href="http://shangsunset.github.io/tag/pelican.html">#Pelican</a></li>
+        <li class="tag-4"><a href="http://shangsunset.github.io/tag/git-hook.html">#Git Hook</a></li>
    </ul>
 </div>
 
@@ -179,7 +284,7 @@ pelican content -o output -s pelicanconf.py <span class="o">&amp;&amp;</span> gh
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '']);
+      _gaq.push(['_setAccount', 'UA-42264721-2']);
       _gaq.push(['_trackPageview']);
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
